@@ -6,10 +6,14 @@ use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use App\Livewire\Book;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+// Bookings
+Route::get('/book', Book::class)->name('book');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
