@@ -10,16 +10,21 @@ class AddressSegment extends Model
         'start_address_id',
         'end_address_id',
         'distance',
-        'travel_time_minutes'
+        'travel_time_minutes',
     ];
+
+    public function routePaths()
+    {
+        return $this->hasMany(RoutePath::class, 'address_segment_id')->orderBy('segment_order_number');
+    }
 
     public function startAddress()
     {
-        return $this->hasOne(Address::class, 'id', 'start_address_id');
+        return $this->belongsTo(Address::class, 'start_address_id');
     }
 
     public function endAddress()
     {
-        return $this->hasOne(Address::class, 'id', 'end_address_id');
+        return $this->belongsTo(Address::class, 'end_address_id');
     }
 }

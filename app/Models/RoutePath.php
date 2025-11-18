@@ -9,16 +9,16 @@ class RoutePath extends Model
     protected $fillable = [
         'route_id',
         'address_segment_id',
-        'segment_order_number'
+        'segment_order_number',
     ];
 
     public function route()
     {
-        return $this->hasOne(Route::class);
+        return $this->belongsTo(Route::class, 'route_id');
     }
 
     public function addressSegment()
     {
-        return $this->hasOne(AddressSegment::class);
+        return $this->belongsTo(AddressSegment::class, 'address_segment_id');
     }
 }

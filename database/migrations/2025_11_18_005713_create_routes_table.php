@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
+            $table->time('start_time');
+            $table->string('day_of_the_week');
             $table->timestamps();
         });
     }

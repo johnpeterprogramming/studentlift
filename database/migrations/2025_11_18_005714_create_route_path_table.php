@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('route_path', function (Blueprint $table) {
+        Schema::create('route_paths', function (Blueprint $table) {
             $table->id();
             $table->foreignId('route_id')->constrained('routes');
             $table->foreignId('address_segment_id')->constrained('address_segments');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('route_path');
+        Schema::dropIfExists('route_paths');
     }
 };
