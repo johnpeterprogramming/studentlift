@@ -59,18 +59,22 @@
                 </x-slot>
                 <form wire:submit="book" class="px-4">
                     <!-- Departure -->
-                    <x-select label="Friday Departure"
+                    <x-select label="From Location"
                         placeholder="Select Departure Timeslot"
                         class="my-4"
-                        :options="$departure_timeslots"
+                        :options="$departureAddresses"
+                        option-label="name"
+                        option-value="id"
                         wire:model="selected_departure"
                     />
 
                     <!-- Return -->
-                    <x-select label="Sunday Return"
+                    <x-select label="To Location"
                         placeholder="Select Return Timeslot"
                         class="my-4"
-                        :options="$return_timeslots"
+                        :options="$returnAddresses"
+                        option-label="name"
+                        option-value="id"
                         wire:model="selected_return"
                     />
 
@@ -88,7 +92,37 @@
         x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="opacity-0 transform translate-y-2"
         x-transition:enter-end="opacity-100 transform translate-y-0">
-        <h2>Once-off</h2>
+
+        <article class="flex justify-center mt-8">
+            <x-card class="w-200">
+                <x-slot name="title">
+                    <h2 class="text-2xl font-bold">Choose Timeslot</h2>
+                </x-slot>
+                <form wire:submit="book" class="px-4">
+                    <!-- Departure -->
+                    <x-select label="From Location"
+                        placeholder="Select Departure Timeslot"
+                        class="my-4"
+                        :options="$departureAddresses"
+                        option-label="name"
+                        option-value="id"
+                        wire:model="selected_departure"
+                    />
+
+                    <!-- Return -->
+                    <x-select label="To Location"
+                        placeholder="Select Return Timeslot"
+                        class="my-4"
+                        :options="$returnAddresses"
+                        option-label="name"
+                        option-value="id"
+                        wire:model="selected_return"
+                    />
+
+                    <x-button type="submit" label="Continue to Payment" primary/>
+                </form>
+            </x-card>
+        </article>
     </section>
 
 
