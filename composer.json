@@ -17,6 +17,7 @@
         "wireui/wireui": "^2.5.1"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.6",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.0",
         "laravel/pail": "^1.2.2",
@@ -73,7 +74,12 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "ide-helper" : [
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:models --nowrite"
         ]
+
     },
     "extra": {
         "laravel": {

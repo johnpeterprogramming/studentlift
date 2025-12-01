@@ -1,0 +1,121 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to an undefined method Illuminate\\Foundation\\Auth\\EmailVerificationRequest\:\:user\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Auth/VerifyEmailController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\User\:\:hasEnabledTwoFactorAuthentication\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Livewire/Auth/Login.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Http\\Request\:\:ip\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Livewire/Auth/Login.php
+
+		-
+			message: '#^Parameter \#1 \$user of static method Illuminate\\Support\\Facades\\Auth\:\:login\(\) expects Illuminate\\Contracts\\Auth\\Authenticatable, App\\Models\\User given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Auth/Login.php
+
+		-
+			message: '#^Parameter \#1 \$user of class Illuminate\\Auth\\Events\\Registered constructor expects Illuminate\\Contracts\\Auth\\Authenticatable, App\\Models\\User given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Auth/Register.php
+
+		-
+			message: '#^Parameter \#1 \$user of static method Illuminate\\Support\\Facades\\Auth\:\:login\(\) expects Illuminate\\Contracts\\Auth\\Authenticatable, App\\Models\\User given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Auth/Register.php
+
+		-
+			message: '#^Access to undefined constant Illuminate\\Support\\Facades\\Password\:\:PasswordReset\.$#'
+			identifier: classConstant.notFound
+			count: 1
+			path: app/Livewire/Auth/ResetPassword.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Http\\Request\:\:string\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Livewire/Auth/ResetPassword.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\User\:\:hasVerifiedEmail\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Livewire/Auth/VerifyEmail.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\User\:\:sendEmailVerificationNotification\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Livewire/Auth/VerifyEmail.php
+
+		-
+			message: '#^Relation ''routePaths'' is not found in App\\Models\\Route model\.$#'
+			identifier: larastan.relationExistence
+			count: 2
+			path: app/Livewire/Book.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\User\:\:hasVerifiedEmail\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Livewire/Settings/Profile.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\User\:\:sendEmailVerificationNotification\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Livewire/Settings/Profile.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\User\:\:hasEnabledTwoFactorAuthentication\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: app/Livewire/Settings/TwoFactor.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\User\:\:twoFactorQrCodeSvg\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Livewire/Settings/TwoFactor.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\User\:\:hasEnabledTwoFactorAuthentication\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Livewire/Settings/TwoFactor/RecoveryCodes.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$addressSegment\.$#'
+			identifier: property.notFound
+			count: 5
+			path: app/Models/Route.php
+
+		-
+			message: '#^Illuminate\\Support\\Collection\<int, array\{city\: string, address\: string, time\: mixed\}\> does not accept array\<string, mixed\>\.$#'
+			identifier: offsetAssign.valueType
+			count: 1
+			path: app/Models/Route.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: array\{city\: string, address\: string, time\: mixed\}, Closure\(App\\Models\\RoutePath\)\: array\{city\: string, address\: string, time\: mixed\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/Route.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Http\\Request\:\:session\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Providers/FortifyServiceProvider.php
