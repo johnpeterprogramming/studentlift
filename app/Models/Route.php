@@ -3,7 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @phpstan-method Carbon|null getArrivalTime(int $targetAddressId)
+ */
 class Route extends Model
 {
     protected $fillable = [
@@ -15,18 +20,19 @@ class Route extends Model
         'start_time' => 'datetime:H:i',
     ];
 
-    public function routePaths()
+    public function routePaths() : HasMany
     {
         return $this->hasMany(RoutePath::class, 'route_id')->orderBy('segment_order_number');
     }
 
     /**
-    Given a certain endAddress it will go through address in
-    order of routes and calculate the arrival time based
-    off of travel_time_minutes of each addressSegment.
-    @return null|Carbon
+        Given a certain endAddress it will go through address in
+        order of routes and calculate the arrival time based
+        off of travel_time_minutes of each addressSegment.
+
+        @return null|Carbon
     */
-    public function getArrivalTime(int $targetAddressId)
+    public function getArrivalTime(int $targetAddressId) : Carbon|null
     {
         // Check if targetAddressId exists in the route
         if (!$this->routePaths()

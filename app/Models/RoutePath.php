@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RoutePath extends Model
 {
@@ -12,12 +13,12 @@ class RoutePath extends Model
         'segment_order_number',
     ];
 
-    public function route()
+    public function route() : BelongsTo
     {
         return $this->belongsTo(Route::class, 'route_id');
     }
 
-    public function addressSegment()
+    public function addressSegment() : BelongsTo
     {
         return $this->belongsTo(AddressSegment::class, 'address_segment_id');
     }

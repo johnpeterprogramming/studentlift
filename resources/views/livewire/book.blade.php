@@ -1,4 +1,4 @@
-<div x-data="{ show_membership_panel : true, membership_selected: '' }">
+<div x-data="{ show_membership_panel : @entangle('showMembershipPanel'), membership_selected: '' }">
 
     <!-- Tab Selection - Membership Pass is selected by default -->
     <nav class="flex gap-4 justify-center p-2">
@@ -64,19 +64,22 @@
                         class="my-4"
                         :options="$departureAddresses"
                         option-label="name"
-                        option-value="id"
-                        wire:model="selected_departure"
+                        option-value="value"
+                        wire:model.live="selectedDeparture"
                     />
 
                     <!-- Return -->
                     <x-select label="To Location"
                         placeholder="Select Return Timeslot"
                         class="my-4"
-                        :options="$returnAddresses"
+                        :options="$arrivalAddresses"
                         option-label="name"
-                        option-value="id"
-                        wire:model="selected_return"
+                        option-value="value"
+                        wire:model.live="selectedArrival"
+                        :disabled="!$selectedDeparture"
                     />
+
+                    <input type="hidden" wire:model="selectedBookingType" value="membership">
 
                     <x-button type="submit" label="Continue to Registration" primary/>
                 </form>
@@ -101,22 +104,22 @@
                 <form wire:submit="book" class="px-4">
                     <!-- Departure -->
                     <x-select label="From Location"
-                        placeholder="Select Departure Timeslot"
+                        placeholder="Select Departure Location"
                         class="my-4"
                         :options="$departureAddresses"
                         option-label="name"
-                        option-value="id"
-                        wire:model="selected_departure"
+                        option-value="value"
+                        wire:model="selectedDeparture"
                     />
 
-                    <!-- Return -->
+                    <!-- Arrival -->
                     <x-select label="To Location"
-                        placeholder="Select Return Timeslot"
+                        placeholder="Select Arrival Location"
                         class="my-4"
-                        :options="$returnAddresses"
+                        :options="$arrivalAddresses"
                         option-label="name"
-                        option-value="id"
-                        wire:model="selected_return"
+                        option-value="value"
+                        wire:model="selectedArrival"
                     />
 
                     <x-button type="submit" label="Continue to Payment" primary/>
