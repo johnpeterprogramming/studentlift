@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Book;
+use App\Livewire\Payment;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -14,6 +15,13 @@ Route::get('/', function () {
 
 // Bookings
 Route::get('/book', Book::class)->name('book');
+
+Route::middleware(['payment-allowed'])->group(function() {
+    Route::get('/book/payment', Payment::class)->name('booking.payment');
+});
+// TODO: booking.payment
+// TODO: booking-success
+// TODO: register
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

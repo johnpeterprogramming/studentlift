@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use WireUi\Traits\WireUiActions;
 
 use App\Models\Route;
+use App\Models\User;
 use App\Models\RoutePath;
 use App\Models\Booking;
 use Illuminate\Support\Collection;
@@ -31,36 +32,37 @@ class Book extends Component
     public function rules()
     {
         return [
-            'selectedDeparture' => ['required', Rule::in($this->departureAddresses->flatMap(fn($item) => $item['value']))],
-            'selectedArrival' => ['required', Rule::in($this->arrivalAddresses->flatMap(fn($item) => $item['value']))],
+            'selectedDeparture' => ['required', Rule::in($this->departureAddresses->map(fn($item) => $item['value']))],
+            'selectedArrival' => ['required', Rule::in($this->arrivalAddresses->map(fn($item) => $item['value']))],
         ];
     }
 
     public function book()
     {
-        /* $this->validate(); */
+        $this->validate();
 
         // Extract id's from hypen delimited value
         [$routeId, $departureAddressId] = explode('-', $this->selectedDeparture);
         [, $arrivalAddressId] = explode('-', $this->selectedArrival);
 
-        $booking = Booking::create([
+
+        // Save booking info to session incase user isn't logged in yet
+        session()->put('pending_booking', [
             'route_id' => $routeId,
             'departure_address_id' => $departureAddressId,
             'arrival_address_id' => $arrivalAddressId,
-            'user_id' => Auth::user()->id ?? 0, // TODO: Handle guest bookings
-            'booking_type' => $this->showMembershipPanel == true ? 'membership' : 'once-off',
-            'status' => 'pending'
+            'booking_type' => $this->showMembershipPanel ? 'membership' : 'once-off',
         ]);
 
-        \Log::debug($booking);
-
-        $this->notification()->success(
-            $title = 'Booking Confirmed',
-            $description = 'Your trip has been successfully saved.'
-        );
-
-        return $this->redirect(route('register'), navigate: true);
+        return $this->redirect(route('booking.payment'), navigate: true);
+        /* // Once-off Payments go straight to payment portal */
+        /* if (!$this->showMembershipPanel) */
+        /**/
+        /* // For memberships; the user must be registered */
+        /* if (!Auth::user()) */
+        /*     return $this->redirect(route('register'), navigate: true); */
+        /**/
+        /* return $this->redirect(route('booking-success'), navigate: true); */
     }
 
     /**
@@ -141,6 +143,7 @@ class Book extends Component
             ->get()
             ->flatmap(fn(Route $route) => $this->mapRouteToDepartureAddresses($route));
 
+        /* \Log::debug($this->departureAddresses->map(fn($item) => $item['value'])); */
         // TODO: use caching
         $this->arrivalAddresses = collect();
     }

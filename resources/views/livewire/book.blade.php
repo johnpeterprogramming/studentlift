@@ -60,7 +60,7 @@
                 <form wire:submit="book" class="px-4">
                     <!-- Departure -->
                     <x-select label="From Location"
-                        placeholder="Select Departure Timeslot"
+                        placeholder="Select Departure Location"
                         class="my-4"
                         :options="$departureAddresses"
                         option-label="name"
@@ -70,7 +70,7 @@
 
                     <!-- Return -->
                     <x-select label="To Location"
-                        placeholder="Select Return Timeslot"
+                        placeholder="Select Arrival Timeslot"
                         class="my-4"
                         :options="$arrivalAddresses"
                         option-label="name"
@@ -79,9 +79,7 @@
                         :disabled="!$selectedDeparture"
                     />
 
-                    <input type="hidden" wire:model="selectedBookingType" value="membership">
-
-                    <x-button type="submit" label="Continue to Registration" primary/>
+                    <x-button type="submit" label="Continue to Payment" primary/>
                 </form>
             </x-card>
         </article>
@@ -109,7 +107,7 @@
                         :options="$departureAddresses"
                         option-label="name"
                         option-value="value"
-                        wire:model="selectedDeparture"
+                        wire:model.live="selectedDeparture"
                     />
 
                     <!-- Arrival -->
@@ -119,7 +117,8 @@
                         :options="$arrivalAddresses"
                         option-label="name"
                         option-value="value"
-                        wire:model="selectedArrival"
+                        wire:model.live="selectedArrival"
+                        :disabled="!$selectedDeparture"
                     />
 
                     <x-button type="submit" label="Continue to Payment" primary/>
